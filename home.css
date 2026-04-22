@@ -42,11 +42,35 @@ body {
 
 .map {
   position: relative;
+  width: 100%;
+  padding-top: 64.1%;
+  z-index: 0;
 }
-
+.map-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+}
+.map-label {
+  position: absolute;
+  left: var(--x);
+  top: var(--y);
+  transform: translate(-50%, -50%);
+  color: white;
+  font-size: 5rem;
+  font-weight: bold;
+  text-shadow: 0 0 10px black;
+  pointer-events: none;
+  z-index: 5;
+}
 .pin {
-    width: 10px;
-    height: 10px;
+    
+    width: 20px;
+    height: 20px;
     background: red;
     border: none;
     border-radius: 50%;
@@ -55,9 +79,11 @@ body {
     top: attr(data-top);
     left: attr(data-left);
     --img: url('');
-	left: var(--x);
+    left: var(--x);
     top: var(--y);
     transform: translate(-50%, -50%);
+    z-index: 1;
+
 }
 
 .pin::after {
@@ -65,17 +91,53 @@ body {
   position: absolute;
   top: -10px;
   left: 50px;
-  width: 150px;
-  height: 150px;
+  width: 300px;
+  height: 300px;
+  background-color: white;
+  background-image: var(--img);
   background-size: cover;
   background-position: center;
   border: 2px solid white;
-  display: none;
+  border-radius: 6px;
+
+  opacity: 0;
+  transform: scale(0.8);
+  filter: blur(4px);
+
+  pointer-events: none;
+
+  transition:
+    opacity 0.35s ease,
+    transform 0.35s ease,
+    filter 0.35s ease;
+
 }
 
 .pin:hover::after {
   display: block;
-  
-  background-image: var(--img);
+  opacity: 1;
+  transform: scale(1);
+  filter: blur(0);
+  z-index: 999;
 }
 
+/* Smooth fade animation */
+.pin {
+  transition: opacity 0.2s ease;
+}
+
+/* When hovering a pin, fade all pins */
+.pin:hover ~ .pin,
+.pin:hover {
+  opacity: 1;
+}
+
+/* Default: all pins fully visible */
+.map .pin {
+  opacity: 1;
+}
+
+/* Fade all non-hovered pins */
+.map:hover .pin:not(:hover) {
+  opacity: 0.2;
+}
