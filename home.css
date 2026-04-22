@@ -55,6 +55,9 @@ body {
     top: attr(data-top);
     left: attr(data-left);
     --img: url('');
+	left: var(--x);
+    top: var(--y);
+    transform: translate(-50%, -50%);
 }
 
 .pin::after {
