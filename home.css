@@ -1,51 +1,129 @@
-body {
-				
-            background-color: #424242;
-			}
 
-			ul {
-				list-style-type: none;
-				margin: 0;
-				padding: 0;
-				overflow: hidden;
-				background-color: #424242;
-                                font-family: Arial;
-			}
-
-			li {
-				float: left;
-			}
-
-			li a {
-				display: block;
-				color: white;
-				text-align: center;
-				padding: 16px;
-				text-decoration: none;
-                                font-family: Arial;
-                            
-			}
-
-			li a:hover {
-				background-color: #808080;
-                                transform: scale(1.1);
-
+/* --- 1. GLOBAL & BASE STYLES --- */
+html {
+  scroll-behavior: smooth;
 }
 
+body {
+  background-color: #424242;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden; /* Prevents accidental side-scrolling */
+}
 
-.solid-line {
-            border: none;              
-            border-top: 3px solid #000; 
-            margin: 5px 0;    
-            border-color: white;    
-        }
+* {
+  box-sizing: border-box;
+}
 
+/* --- 2. NAVIGATION BAR --- */
+.navbar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #222;
+  padding: 15px 10px;
+  gap: clamp(10px, 2vw, 25px);
+  flex-wrap: wrap;
+  position: sticky;
+  top: 0;
+  z-index: 2000;
+}
+
+.nav-link {
+  position: relative;
+  color: #ffffff;
+  text-decoration: none;
+  font-family: 'Arial', sans-serif;
+  font-weight: bold;
+  font-size: clamp(0.85rem, 1.2vw, 1.1rem);
+  padding: 5px 0;
+  transition: color 0.3s ease;
+  white-space: nowrap;
+}
+
+.nav-link::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 3px;
+  bottom: -2px;
+  left: 50%;
+  background-color: #ff4d4d;
+  transition: all 0.3s ease-in-out;
+  transform: translateX(-50%);
+}
+
+.nav-link:hover {
+  color: #ff4d4d;
+}
+
+.nav-link:hover::after {
+  width: 100%;
+}
+
+/* --- 3. HERO SECTION (TITLE & BUTTON) --- */
+.hero-section {
+  text-align: center;
+  padding: 40px 20px 20px 20px; /* Top padding keeps it away from Nav */
+  margin: 0;
+}
+
+.title {
+  margin-top: 0;
+  margin-bottom: 20px;
+  line-height: 1.1;
+  font-family: 'Arial Black', sans-serif;
+  text-transform: uppercase;
+  color: white;
+  font-size: clamp(2rem, 8vw, 5rem);
+  letter-spacing: clamp(2px, 1vw, 8px);
+  text-shadow: 0 10px 20px rgba(0,0,0,0.5);
+}
+
+.title span {
+  color: #ff4d4d;
+}
+
+.scroll-button {
+  display: inline-block;
+  padding: 15px 30px;
+  background-color: #ff4d4d;
+  color: white;
+  text-decoration: none;
+  font-family: 'Arial', sans-serif;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  border-radius: 50px;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(255, 77, 77, 0.3);
+  cursor: pointer;
+  animation: bounce 2s infinite;
+}
+
+.scroll-button:hover {
+  background-color: #fff;
+  color: #ff4d4d;
+  transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgba(255, 77, 77, 0.5);
+}
+
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
+  40% {transform: translateY(-10px);}
+  60% {transform: translateY(-5px);}
+}
+
+/* --- 4. MAP CONTAINER --- */
 .map {
   position: relative;
   width: 100%;
-  padding-top: 64.1%;
+  /* FIX: Using aspect-ratio instead of padding-top removes the giant gap */
+  aspect-ratio: 100 / 64.1; 
+  margin-top: 0; 
   z-index: 0;
 }
+
 .map-image {
   position: absolute;
   top: 0;
@@ -53,40 +131,34 @@ body {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  z-index: 0;
 }
-.map-label {
+
+/* --- 5. PINS & POPUPS --- */
+
+/* Base Pin Style */
+.pin, .pinusa {
   position: absolute;
+  background: red;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
   left: var(--x);
   top: var(--y);
   transform: translate(-50%, -50%);
-  color: white;
-  font-size: 5rem;
-  font-weight: bold;
-  text-shadow: 0 0 10px black;
-  pointer-events: none;
-  z-index: 5;
-}
-.pin {
-    
-    width: 20px;
-    height: 20px;
-    background: red;
-    border: none;
-    border-radius: 50%;
-    position: absolute;
-    cursor: pointer;
-    top: attr(data-top);
-    left: attr(data-left);
-    --img: url('');
-    left: var(--x);
-    top: var(--y);
-    transform: translate(-50%, -50%);
-    z-index: 1;
-
+  z-index: 1;
+  transition: opacity 0.2s ease, z-index 0s;
 }
 
-.pin::after {
+.pin { width: 20px; height: 20px; opacity: 0.35; }
+.pinusa { width: 55px; height: 55px; opacity: 0; }
+
+.pin:hover, .pinusa:hover {
+  opacity: 1;
+  z-index: 1000;
+}
+
+/* Popups */
+.pin::after, .pinusa::after {
   content: "";
   position: absolute;
   top: -10px;
@@ -94,50 +166,94 @@ body {
   width: 300px;
   height: 300px;
   background-color: white;
-  background-image: var(--img);
   background-size: cover;
   background-position: center;
   border: 2px solid white;
   border-radius: 6px;
-
   opacity: 0;
   transform: scale(0.8);
   filter: blur(4px);
-
   pointer-events: none;
-
-  transition:
-    opacity 0.35s ease,
-    transform 0.35s ease,
-    filter 0.35s ease;
-
+  transition: opacity 0.35s ease, transform 0.35s ease, filter 0.35s ease;
 }
 
-.pin:hover::after {
-  display: block;
+.pin::after { background-image: var(--img); }
+.pinusa::after { background-image: var(--imgusa); }
+
+.pin:hover::after, .pinusa:hover::after {
   opacity: 1;
   transform: scale(1);
   filter: blur(0);
-  z-index: 999;
+  z-index: 1001;
 }
 
-/* Smooth fade animation */
-.pin {
-  transition: opacity 0.2s ease;
+/* Fade non-hovered pins */
+.map:hover .pin:not(:hover) { opacity: 0.2; }
+.map:hover .pinusa:not(:hover) { opacity: 0; }
+
+
+
+/* --- 6. MEDIA QUERIES --- */
+@media (max-width: 600px) {
+  .navbar { padding: 10px; gap: 15px; }
+  .title { margin: 20px 10px; }
+  .pin::after, .pinusa::after {
+    width: 200px;
+    height: 200px;
+    left: 30px;
+  }
 }
 
-/* When hovering a pin, fade all pins */
-.pin:hover ~ .pin,
-.pin:hover {
-  opacity: 1;
+/* Banner Container */
+.banner-section {
+    position: relative;
+    width: 100%;
+    height: 60vh; /* Takes up 60% of the screen height */
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-/* Default: all pins fully visible */
-.map .pin {
-  opacity: 1;
+/* Background Image inside Banner */
+.banner-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -1;
+    filter: brightness(60%); /* Darkens image so text is readable */
 }
 
-/* Fade all non-hovered pins */
-.map:hover .pin:not(:hover) {
-  opacity: 0.2;
+/* Text Overlay Styling */
+.banner-overlay {
+    text-align: center;
+    max-width: 800px;
+    padding: 20px;
+    color: white;
+}
+
+.banner-title {
+    font-family: 'Arial Black', sans-serif;
+    font-size: clamp(2rem, 6vw, 4rem);
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    letter-spacing: 4px;
+    text-shadow: 0 5px 15px rgba(0,0,0,0.7);
+}
+
+.banner-title span {
+    color: #ff4d4d; /* Matching your pin/accent color */
+}
+
+.banner-description {
+    font-family: 'Arial', sans-serif;
+    font-size: clamp(1rem, 2vw, 1.25rem);
+    line-height: 1.6;
+    background: rgba(0, 0, 0, 0.4); /* Subtle box for text readability */
+    padding: 20px;
+    border-radius: 8px;
+    backdrop-filter: blur(5px);
 }

@@ -1,47 +1,56 @@
+<!DOCTYPE html>
 <html>
 <head>
 
-<title>7 Wonders</title>
-
-<style>
-
-</style>
-<link href="home.css" rel="stylesheet" type="text/css">
+    <link href="home.css" rel="stylesheet" type="text/css">
+    <title>7 Wonders</title>
+<link rel="icon" type="image/png" href="7.png">
 </head>
 <body>
 
+<nav class="navbar">
+    <a href="index.html" class="nav-link">Home</a>
+    <a href="china.html" class="nav-link">Great Wall of China</a>
+    <a href="petra.html" class="nav-link">Petra</a>
+    <a href="colosseum.html" class="nav-link">The Colosseum</a>
+    <a href="chicken.html" class="nav-link">Chichen Itza</a>
+    <a href="machu.html" class="nav-link">Machu Picchu</a>
+    <a href="taj.html" class="nav-link">Taj Mahal</a>
+    <a href="christ.html" class="nav-link">Christ the Redeemer</a>
+</nav>
 
-<div id="topbar">
-<ul>
-<li><a href="index.html">Home</a></li>
-<li><a href="china.html">Great Wall of China</a></li>
-<li><a href="petra.html">Petra</a></li>
-<li><a href="colosseum.html">The Colosseum</a></li>
-<li><a href="chicken.html">Chichen Itza</a>
-<li><a href="machu.html">Machu Picchu</a></li>
-<li><a href="taj.html">Taj Mahal</a>
-<li><a href="christ.html">Christ the Redeemer</a>
-<ul>
+<div class="hero-section">
+    <h1 class="title">The <span>7</span> Wonders Of the World</h1>
+    <a href="#world-map" class="scroll-button">Explore the Map</a>
 </div>
-<hr class="solid-line">
-<div class="map-label" style="--x:50%; --y:20%;">
-        The 7 Wonders Of the World
-    </div>
-<div class="map">
-<img src="b.png" class="map-image">
-<button class="pin" style="--x:52%; --y:42.5%;" data-image="colosseum.jpg" onclick="window.location.href='colosseum.html'";></button>
-<button class="pin" style="--x:79%; --y:43.5%;" data-image="china.jpg" onclick="window.location.href='china.html'";></button>
-<button class="pin" style="--x:58%; --y:48.5%;" data-image="petra.jpg" onclick="window.location.href='petra.html'";></button>
-<button class="pin" style="--x:25%; --y:53.5%;" data-image="chicken.jpg" onclick="window.location.href='chicken.html'";></button>
-<button class="pin" style="--x:29%; --y:67.5%;" data-image="machu.jpg" onclick="window.location.href='machu.html'";></button>
-<button class="pin" style="--x:70%; --y:51.5%;" data-image="taj.jpg" onclick="window.location.href='taj.html'";></button>
-<button class="pin" style="--x:36%; --y:72.5%;" data-image="christ.jpg" onclick="window.location.href='christ.html'";></button>
+
+<div id="world-map" class="map">
+    <img src="b.png" class="map-image">
+    
+    <button class="pin" style="--x:52%; --y:42.5%;" data-image="colosseum.jpg" onclick="window.location.href='colosseum.html'"></button>
+    <button class="pin" style="--x:79%; --y:43.5%;" data-image="china.jpg" onclick="window.location.href='china.html'"></button>
+    <button class="pin" style="--x:58%; --y:48.5%;" data-image="petra.jpg" onclick="window.location.href='petra.html'"></button>
+    <button class="pin" style="--x:25%; --y:53.5%;" data-image="chicken.jpg" onclick="window.location.href='chicken.html'"></button>
+    <button class="pin" style="--x:29%; --y:67.5%;" data-image="machu.jpg" onclick="window.location.href='machu.html'"></button>
+    <button class="pin" style="--x:70%; --y:51.5%;" data-image="taj.jpg" onclick="window.location.href='taj.html'"></button>
+    <button class="pin" style="--x:36%; --y:72.5%;" data-image="christ.jpg" onclick="window.location.href='christ.html'"></button>
+    
+    <button class="pinusa" style="--x:63%; --y:47%;" data-image="donald-trump.jpg" onclick="window.location.href=''"></button>
+    <button class="pinusa" style="--x:40%; --y:25%;" data-image="jd.jpg" onclick="window.location.href=''"></button>
+ <button class="pinusa" style="--x:48%; --y:36%;" data-image="starmer.jpg" onclick="window.location.href=''"></button>
+ <button class="pinusa" style="--x:87%; --y:75%;" data-image="https://media.licdn.com/dms/image/v2/D4E03AQG9wyoYO8Lang/profile-displayphoto-shrink_400_400/profile-displayphoto-shrink_400_400/0/1708465427758?e=1778716800&v=beta&t=e8ZX3mu_ZPt9uhRBjXbl0igDefMqf-ZV9KPgyZUJKBM" onclick="window.location.href=''"></button>
+</div>
+
 <script>
-  document.querySelectorAll('.pin').forEach(pin => {
-    const img = pin.getAttribute('data-image');
-    pin.style.setProperty('--img', `url(${img})`);
-  });
+    document.querySelectorAll('.pin').forEach(pin => {
+        const img = pin.getAttribute('data-image');
+        pin.style.setProperty('--img', `url(${img})`);
+    });
+    document.querySelectorAll('.pinusa').forEach(pinusa => {
+        const img = pinusa.getAttribute('data-image');
+        pinusa.style.setProperty('--imgusa', `url(${img})`);
+    });
 </script>
-</div>
+
 </body>
-<html>
+</html>
