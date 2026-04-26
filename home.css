@@ -1,5 +1,5 @@
 
-/* --- 1. GLOBAL & BASE STYLES --- */
+
 html {
   scroll-behavior: smooth;
 }
@@ -8,14 +8,14 @@ body {
   background-color: #424242;
   margin: 0;
   padding: 0;
-  overflow-x: hidden; /* Prevents accidental side-scrolling */
+  overflow-x: hidden; 
 }
 
 * {
   box-sizing: border-box;
 }
 
-/* --- 2. NAVIGATION BAR --- */
+
 .navbar {
   display: flex;
   justify-content: center;
@@ -61,10 +61,10 @@ body {
   width: 100%;
 }
 
-/* --- 3. HERO SECTION (TITLE & BUTTON) --- */
+
 .hero-section {
   text-align: center;
-  padding: 40px 20px 20px 20px; /* Top padding keeps it away from Nav */
+  padding: 40px 20px 20px 20px;
   margin: 0;
 }
 
@@ -114,11 +114,10 @@ body {
   60% {transform: translateY(-5px);}
 }
 
-/* --- 4. MAP CONTAINER --- */
+
 .map {
   position: relative;
   width: 100%;
-  /* FIX: Using aspect-ratio instead of padding-top removes the giant gap */
   aspect-ratio: 100 / 64.1; 
   margin-top: 0; 
   z-index: 0;
@@ -133,9 +132,6 @@ body {
   object-fit: cover;
 }
 
-/* --- 5. PINS & POPUPS --- */
-
-/* Base Pin Style */
 .pin, .pinusa {
   position: absolute;
   background: red;
@@ -157,7 +153,6 @@ body {
   z-index: 1000;
 }
 
-/* Popups */
 .pin::after, .pinusa::after {
   content: "";
   position: absolute;
@@ -187,13 +182,9 @@ body {
   z-index: 1001;
 }
 
-/* Fade non-hovered pins */
 .map:hover .pin:not(:hover) { opacity: 0.2; }
 .map:hover .pinusa:not(:hover) { opacity: 0; }
 
-
-
-/* --- 6. MEDIA QUERIES --- */
 @media (max-width: 600px) {
   .navbar { padding: 10px; gap: 15px; }
   .title { margin: 20px 10px; }
@@ -204,18 +195,16 @@ body {
   }
 }
 
-/* Banner Container */
 .banner-section {
     position: relative;
     width: 100%;
-    height: 60vh; /* Takes up 60% of the screen height */
+    height: 60vh;
     overflow: hidden;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-/* Background Image inside Banner */
 .banner-image {
     position: absolute;
     top: 0;
@@ -224,10 +213,9 @@ body {
     height: 100%;
     object-fit: cover;
     z-index: -1;
-    filter: brightness(60%); /* Darkens image so text is readable */
+    filter: brightness(60%);
 }
 
-/* Text Overlay Styling */
 .banner-overlay {
     text-align: center;
     max-width: 800px;
@@ -245,14 +233,14 @@ body {
 }
 
 .banner-title span {
-    color: #ff4d4d; /* Matching your pin/accent color */
+    color: #ff4d4d;
 }
 
 .banner-description {
     font-family: 'Arial', sans-serif;
     font-size: clamp(1rem, 2vw, 1.25rem);
     line-height: 1.6;
-    background: rgba(0, 0, 0, 0.4); /* Subtle box for text readability */
+    background: rgba(0, 0, 0, 0.4);
     padding: 20px;
     border-radius: 8px;
     backdrop-filter: blur(5px);
